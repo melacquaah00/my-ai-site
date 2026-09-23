@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MY A.I. — Sabathil720</title>
+  <meta name="description" content="MY A.I. — official brand hub for Sabathil720. Watch the video, comics, episodes, and merch coming soon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <main class="page">
+    <header class="brand">
+      <p class="tag">Sabathil720</p>
+      <h1 class="title">MY A.I.</h1>
+    </header>
+
+    <figure class="hero">
+      <img
+        src="hero.jpg"
+        alt="Sierra and 720 in neon cyberpunk city — MY A.I."
+        width="1080"
+        height="1920"
+      />
+    </figure>
+
+    <nav class="links" aria-label="MY A.I. sections">
+      <a
+        class="link video"
+        href="https://www.youtube.com/watch?v=epvNC628kIs"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        VIDEO
+      </a>
+
+      <a class="link soon" href="#comics" id="comics">
+        <span class="label">COMICS</span>
+        <span class="soon-tag">Coming Soon</span>
+      </a>
+
+      <a class="link soon" href="#episodes" id="episodes">
+        <span class="label">EPISODES</span>
+        <span class="soon-tag">Coming Soon</span>
+      </a>
+
+      <a class="link soon" href="#merchandise" id="merchandise">
+        <span class="label">MERCHANDISE</span>
+        <span class="soon-tag">Coming Soon</span>
+      </a>
+    </nav>
+
+    <footer class="foot">
+      <p>© <span id="y"></span> Sabathil720 · MY A.I.</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
