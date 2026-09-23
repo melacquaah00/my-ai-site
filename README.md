@@ -1,21 +1,26 @@
 # MY A.I. — Sabathil720
 
-Public site (GitHub Pages): https://melacquaah00.github.io/my-ai-site/
+**Intended public URL:** https://melacquaah00.github.io/my-ai-site/
 
-Simple brand page:
-- Center hero: Sierra + 720 (9:16)
-- VIDEO (neon) → https://www.youtube.com/watch?v=epvNC628kIs
-- COMICS / EPISODES / MERCHANDISE → Coming Soon
+Site files are on `main`. GitHub Pages is **not enabled yet** — that is a one-time admin setting the Actions `GITHUB_TOKEN` cannot flip (`Resource not accessible by integration`).
 
-## Enable Pages (one-time)
+## Enable Pages (required once)
 
-If the URL above 404s, enable Pages:
+1. Open https://github.com/melacquaah00/my-ai-site/settings/pages
+2. Under **Build and deployment** → **Source**, choose either:
+   - **GitHub Actions** (preferred — workflow `.github/workflows/pages.yml` is ready), or
+   - **Deploy from a branch** → Branch **main** / folder **/ (root)**
+3. Save. After the next successful deploy (or immediately for branch source), the URL above should return HTTP 200.
 
-1. Repo **Settings** → **Pages**
-2. Build and deployment → Source: **Deploy from a branch**
-3. Branch: **main** / folder: **/ (root)** → Save
+Then re-run the failed workflow if needed: Actions → Deploy GitHub Pages → Re-run.
 
-Or set Source to **GitHub Actions** (workflow `.github/workflows/pages.yml` is included).
+## What’s in the repo
+
+- `index.html` + `styles.css` — brand page
+- `hero-a.js` + `hero-b.js` — compressed hero photo (base64; MCP cannot push binary JPG)
+- `hero.svg` — neon fallback if JS is blocked
+- `.nojekyll` — skip Jekyll for branch deploy
+- `.github/workflows/pages.yml` — Pages deploy workflow (`enablement: true` attempted; admin enable still required)
 
 ## Preview locally
 
