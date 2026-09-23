@@ -22,6 +22,7 @@
 
     <figure class="hero">
       <img
+        id="hero-img"
         src="hero.jpg"
         alt="Sierra and 720 in neon cyberpunk city — MY A.I."
         width="1080"
@@ -62,6 +63,25 @@
 
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+    (async function loadHero() {
+      var img = document.getElementById("hero-img");
+      try {
+        var res = await fetch("hero.jpg", { method: "HEAD" });
+        if (res.ok) return;
+      } catch (e) {}
+      try {
+        var parts = ["hero/p00.b64","hero/p01.b64","hero/p02.b64","hero/p03.b64","hero/p04.b64","hero/p05.b64","hero/p06.b64","hero/p07.b64","hero/p08.b64","hero/p09.b64","hero/p10.b64","hero/p11.b64","hero/p12.b64","hero/p13.b64","hero/p14.b64","hero/p15.b64","hero/p16.b64"];
+        var s = "";
+        for (var i = 0; i < parts.length; i++) {
+          s += await (await fetch(parts[i])).text();
+        }
+        s = s.replace(/\s+/g, "");
+        var bin = Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); });
+        img.src = URL.createObjectURL(new Blob([bin], { type: "image/jpeg" }));
+      } catch (e) {
+        console.error("hero load failed", e);
+      }
+    })();
   </script>
 </body>
 </html>
