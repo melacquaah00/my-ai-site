@@ -548,3 +548,54 @@ body {
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(255, 43, 214, 0.35);
 }
+
+
+.comic-scroll {
+  width: 100%;
+  margin: 1.25rem 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.comic-scroll-title {
+  margin: 0;
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cyan, #2de2ff);
+  text-align: center;
+}
+.comic-scroll-page {
+  margin: 0;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 43, 214, 0.35);
+  background: #000;
+}
+.comic-scroll-label {
+  margin: 0;
+  padding: 0.45rem 0.6rem;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #fff;
+  background: rgba(255, 43, 214, 0.2);
+  text-align: center;
+}
+.comic-scroll-page img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+a.comic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+a.comic-btn[aria-disabled="true"] {
+  opacity: 0.35;
+  pointer-events: none;
+}
