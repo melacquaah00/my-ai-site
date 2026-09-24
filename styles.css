@@ -512,3 +512,39 @@ body {
 #comic-page-img {
   cursor: pointer;
 }
+
+
+.comics-cover {
+  position: relative;
+  cursor: pointer;
+}
+.comics-cover-caption {
+  margin: 0.45rem 0 0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan, #2de2ff);
+  text-align: center;
+}
+.comic-btn-next {
+  border-color: rgba(255, 43, 214, 0.7) !important;
+  box-shadow: 0 0 18px rgba(255, 43, 214, 0.35);
+  font-weight: 700;
+}
+.comic-page-num {
+  font-size: 1.15rem !important;
+  color: #fff !important;
+  min-width: 5.5rem !important;
+}
+.comic-flash {
+  animation: comicFlash 0.35s ease;
+}
+@keyframes comicFlash {
+  0% { filter: brightness(1.35); }
+  100% { filter: brightness(1); }
+}
+#comic-page-img {
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 43, 214, 0.35);
+}

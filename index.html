@@ -56,13 +56,15 @@
       <p class="comics-kicker">720: SOUL PROTOCOL</p>
       <h2 class="comics-title">Blood in the Alley</h2>
       <p class="comics-issue">Issue #1</p>
-      <figure class="comics-cover">
+      <figure class="comics-cover" id="comics-cover" title="Tap to start reading">
         <img
           src="assets/issue1-cover.jpg"
-          alt="720: Soul Protocol Issue #1 — Blood in the Alley cover"
+          alt="720: Soul Protocol Issue #1 - Blood in the Alley cover"
           width="900"
           height="1200"
+          onclick="window.comicStart()"
         />
+        <figcaption class="comics-cover-caption">Tap cover to start reading</figcaption>
       </figure>
       <p class="comics-blurb">
         2072. Half a million humans left. Rogue bounty hunter 720 finds Sierra —
@@ -72,20 +74,26 @@
 
       <div class="comic-reader" id="issue1-reader" data-total="10">
         <p class="comic-reader-label">Read Issue #1</p>
+        <div class="comic-controls">
+          <button type="button" class="comic-btn" id="comic-prev" onclick="window.comicGo(-1)">&larr; Prev</button>
+          <span class="comic-page-num" id="comic-page-num">1 / 10</span>
+          <button type="button" class="comic-btn comic-btn-next" id="comic-next" onclick="window.comicGo(1)">Next &rarr;</button>
+        </div>
+        <p class="comic-reader-hint" id="comic-reader-hint">Use Next (or tap the page) to flip</p>
         <figure class="comic-page-frame">
           <img
             id="comic-page-img"
             src="assets/comics/issue1/page-01.png"
-            alt="720: Soul Protocol Issue #1 — page 1"
+            alt="720: Soul Protocol Issue #1 - page 1"
             width="900"
             height="1200"
+            onclick="window.comicTap(event)"
           />
         </figure>
-        <p class="comic-reader-hint">Tap the page or use Next to flip</p>
         <div class="comic-controls">
-          <button type="button" class="comic-btn" id="comic-prev" aria-label="Previous page">&larr; Prev</button>
-          <span class="comic-page-num" id="comic-page-num">1 / 10</span>
-          <button type="button" class="comic-btn" id="comic-next" aria-label="Next page">Next &rarr;</button>
+          <button type="button" class="comic-btn" onclick="window.comicGo(-1)">&larr; Prev</button>
+          <span class="comic-page-num" id="comic-page-num-bottom">1 / 10</span>
+          <button type="button" class="comic-btn comic-btn-next" onclick="window.comicGo(1)">Next &rarr;</button>
         </div>
       </div>
 
@@ -146,70 +154,69 @@
       var y = document.getElementById("y");
       if (y) y.textContent = new Date().getFullYear();
 
-      var reader = document.getElementById("issue1-reader");
       var img = document.getElementById("comic-page-img");
       var num = document.getElementById("comic-page-num");
+      var numBottom = document.getElementById("comic-page-num-bottom");
       var prev = document.getElementById("comic-prev");
       var next = document.getElementById("comic-next");
-      var cover = document.querySelector(".comics-cover img");
-      if (!img || !num || !prev || !next) return;
+      var hint = document.getElementById("comic-reader-hint");
+      var reader = document.getElementById("issue1-reader");
+      if (!img || !num) {
+        console.error("comic reader: missing elements");
+        return;
+      }
 
       var page = 1;
       var total = 10;
-      if (reader && reader.getAttribute("data-total")) {
-        var t = parseInt(reader.getAttribute("data-total"), 10);
+      if (reader) {
+        var t = parseInt(reader.getAttribute("data-total") || "10", 10);
         if (t > 0) total = t;
       }
 
       function pad(n) { return n < 10 ? "0" + n : String(n); }
 
       function show() {
-        img.src = "assets/comics/issue1/page-" + pad(page) + ".png";
+        // cache-bust so the browser can't stick on page 1
+        img.src = "assets/comics/issue1/page-" + pad(page) + ".png?p=" + page;
         img.alt = "720: Soul Protocol Issue #1 - page " + page;
-        num.textContent = page + " / " + total;
-        prev.disabled = page <= 1;
-        next.disabled = page >= total;
+        var label = page + " / " + total;
+        num.textContent = label;
+        if (numBottom) numBottom.textContent = label;
+        if (prev) prev.disabled = page <= 1;
+        if (next) next.disabled = page >= total;
+        if (hint) {
+          hint.textContent = page >= total
+            ? "End of Issue #1 — Prisoner 0-4471 next"
+            : "Page " + page + " of " + total + " — tap Next or the art to flip";
+        }
+        img.classList.remove("comic-flash");
+        void img.offsetWidth;
+        img.classList.add("comic-flash");
       }
 
-      function go(delta) {
+      window.comicGo = function (delta) {
         var nextPage = page + delta;
-        if (nextPage < 1 || nextPage > total) return;
+        if (nextPage < 1 || nextPage > total) return false;
         page = nextPage;
         show();
-      }
+        return false;
+      };
 
-      prev.addEventListener("click", function (e) {
-        e.preventDefault();
-        go(-1);
-      });
-      next.addEventListener("click", function (e) {
-        e.preventDefault();
-        go(1);
-      });
-
-      // Tap/click the page image to flip forward (left third = back)
-      img.style.cursor = "pointer";
-      img.addEventListener("click", function (e) {
+      window.comicTap = function (e) {
         var rect = img.getBoundingClientRect();
-        var x = (e.clientX - rect.left) / rect.width;
-        if (x < 0.33) go(-1);
-        else go(1);
-      });
+        var x = ((e && e.clientX) || 0) - rect.left;
+        if (rect.width > 0 && x / rect.width < 0.33) window.comicGo(-1);
+        else window.comicGo(1);
+        return false;
+      };
 
-      // Cover jumps down to the reader
-      if (cover) {
-        cover.style.cursor = "pointer";
-        cover.title = "Read Issue #1";
-        cover.addEventListener("click", function () {
-          if (reader) reader.scrollIntoView({ behavior: "smooth", block: "start" });
-          show();
-        });
-      }
-
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowLeft") go(-1);
-        if (e.key === "ArrowRight") go(1);
-      });
+      window.comicStart = function () {
+        page = 1;
+        show();
+        if (reader) reader.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (hint) hint.textContent = "Started — hit Next to turn the page";
+        return false;
+      };
 
       show();
     })();
