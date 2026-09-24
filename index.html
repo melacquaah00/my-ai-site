@@ -142,14 +142,45 @@
         </figure>
       </div>
 
-      <ol class="comics-arc">
-        <li class="live"><span>#1</span> Blood in the Alley</li>
-        <li><span>#2</span> Prisoner 0-4471</li>
-        <li><span>#3</span> The Ghost in the Suture</li>
-        <li><span>#4</span> Lusk's Ledger</li>
-        <li><span>#5</span> Camp Meridian</li>
-        <li><span>#6</span> Soul Protocol</li>
+      <ol class="comics-arc" aria-label="Series roadmap">
+        <li class="live">
+          <a class="comics-arc-link" href="#issue1-reader">
+            <span>#1</span> Blood in the Alley
+            <em class="arc-status">Read now</em>
+          </a>
+        </li>
+        <li class="soon">
+          <button type="button" class="comics-arc-link" data-soon="Issue #2 is written. Art comes next.">
+            <span>#2</span> Prisoner 0-4471
+            <em class="arc-status">Coming soon</em>
+          </button>
+        </li>
+        <li class="soon">
+          <button type="button" class="comics-arc-link" data-soon="Locked until Issue #2.">
+            <span>#3</span> The Ghost in the Suture
+            <em class="arc-status">Coming soon</em>
+          </button>
+        </li>
+        <li class="soon">
+          <button type="button" class="comics-arc-link" data-soon="Locked until earlier issues land.">
+            <span>#4</span> Lusk's Ledger
+            <em class="arc-status">Coming soon</em>
+          </button>
+        </li>
+        <li class="soon">
+          <button type="button" class="comics-arc-link" data-soon="Locked until earlier issues land.">
+            <span>#5</span> Camp Meridian
+            <em class="arc-status">Coming soon</em>
+          </button>
+        </li>
+        <li class="soon">
+          <button type="button" class="comics-arc-link" data-soon="Series finale — later.">
+            <span>#6</span> Soul Protocol
+            <em class="arc-status">Coming soon</em>
+          </button>
+        </li>
       </ol>
+      <p class="comics-arc-note" id="comics-arc-note" hidden></p>
     </section>
 
     <nav class="links" aria-label="MY A.I. sections">
@@ -276,6 +307,16 @@
         return false;
       };
 
+
+      // Series roadmap: soon issues explain themselves
+      document.querySelectorAll(".comics-arc-link[data-soon]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var note = document.getElementById("comics-arc-note");
+          if (!note) return;
+          note.hidden = false;
+          note.textContent = btn.getAttribute("data-soon") + " Issue #1 is up above — hit Next or scroll the full issue.";
+        });
+      });
       show();
     })();
   </script>
