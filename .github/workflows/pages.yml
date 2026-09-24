@@ -18,23 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Assemble site
+      - name: Decode hero.jpg from base64 sidecar if needed
         run: |
-          mkdir -p _site
-          cp index.html styles.css _site/
-          touch _site/.nojekyll
-          for f in hero.svg hero-a.js hero-b.js hero.js hero.jpg; do
-            [ -f "$f" ] && cp "$f" _site/
-          done
-          if [ -f hero.jpg.b64 ] && [ ! -f _site/hero.jpg ]; then
-            base64 -d hero.jpg.b64 > _site/hero.jpg
+          if [ ! -f hero.jpg ] && [ -f hero.jpg.b64 ]; then
+            base64 -d hero.jpg.b64 > hero.jpg
           fi
-          ls -la _site
+          ls -la index.html styles.css hero.jpg .nojekyll
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: .
       - id: deployment
         uses: actions/deploy-pages@v4
