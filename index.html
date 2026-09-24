@@ -81,10 +81,11 @@
             height="1200"
           />
         </figure>
+        <p class="comic-reader-hint">Tap the page or use Next to flip</p>
         <div class="comic-controls">
-          <button type="button" class="comic-btn" id="comic-prev" aria-label="Previous page">Prev</button>
+          <button type="button" class="comic-btn" id="comic-prev" aria-label="Previous page">&larr; Prev</button>
           <span class="comic-page-num" id="comic-page-num">1 / 10</span>
-          <button type="button" class="comic-btn" id="comic-next" aria-label="Next page">Next</button>
+          <button type="button" class="comic-btn" id="comic-next" aria-label="Next page">Next &rarr;</button>
         </div>
       </div>
 
@@ -141,25 +142,75 @@
 
   
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
     (function () {
+      var y = document.getElementById("y");
+      if (y) y.textContent = new Date().getFullYear();
+
+      var reader = document.getElementById("issue1-reader");
       var img = document.getElementById("comic-page-img");
       var num = document.getElementById("comic-page-num");
       var prev = document.getElementById("comic-prev");
       var next = document.getElementById("comic-next");
+      var cover = document.querySelector(".comics-cover img");
       if (!img || !num || !prev || !next) return;
+
       var page = 1;
       var total = 10;
+      if (reader && reader.getAttribute("data-total")) {
+        var t = parseInt(reader.getAttribute("data-total"), 10);
+        if (t > 0) total = t;
+      }
+
       function pad(n) { return n < 10 ? "0" + n : String(n); }
+
       function show() {
         img.src = "assets/comics/issue1/page-" + pad(page) + ".png";
-        img.alt = "720: Soul Protocol Issue #1 — page " + page;
+        img.alt = "720: Soul Protocol Issue #1 - page " + page;
         num.textContent = page + " / " + total;
         prev.disabled = page <= 1;
         next.disabled = page >= total;
       }
-      prev.addEventListener("click", function () { if (page > 1) { page--; show(); } });
-      next.addEventListener("click", function () { if (page < total) { page++; show(); } });
+
+      function go(delta) {
+        var nextPage = page + delta;
+        if (nextPage < 1 || nextPage > total) return;
+        page = nextPage;
+        show();
+      }
+
+      prev.addEventListener("click", function (e) {
+        e.preventDefault();
+        go(-1);
+      });
+      next.addEventListener("click", function (e) {
+        e.preventDefault();
+        go(1);
+      });
+
+      // Tap/click the page image to flip forward (left third = back)
+      img.style.cursor = "pointer";
+      img.addEventListener("click", function (e) {
+        var rect = img.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width;
+        if (x < 0.33) go(-1);
+        else go(1);
+      });
+
+      // Cover jumps down to the reader
+      if (cover) {
+        cover.style.cursor = "pointer";
+        cover.title = "Read Issue #1";
+        cover.addEventListener("click", function () {
+          if (reader) reader.scrollIntoView({ behavior: "smooth", block: "start" });
+          show();
+        });
+      }
+
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") go(-1);
+        if (e.key === "ArrowRight") go(1);
+      });
+
       show();
     })();
   </script>

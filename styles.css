@@ -490,3 +490,25 @@ body {
   min-width: 4.5rem;
   text-align: center;
 }
+
+
+.comic-reader-hint {
+  margin: 0;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--muted, #9a90b8);
+  text-align: center;
+}
+
+.comic-btn {
+  min-width: 6.5rem;
+  min-height: 2.75rem;
+  font-size: 0.85rem !important;
+  padding: 0.7rem 1.1rem !important;
+}
+
+.comics-cover img,
+#comic-page-img {
+  cursor: pointer;
+}
