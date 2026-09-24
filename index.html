@@ -69,6 +69,25 @@
         Prisoner 0-4471 — bleeding in a CrumpCorp alley. The machines want a soul.
         This is where the hunt begins.
       </p>
+
+      <div class="comic-reader" id="issue1-reader" data-total="10">
+        <p class="comic-reader-label">Read Issue #1</p>
+        <figure class="comic-page-frame">
+          <img
+            id="comic-page-img"
+            src="assets/comics/issue1/page-01.png"
+            alt="720: Soul Protocol Issue #1 — page 1"
+            width="900"
+            height="1200"
+          />
+        </figure>
+        <div class="comic-controls">
+          <button type="button" class="comic-btn" id="comic-prev" aria-label="Previous page">Prev</button>
+          <span class="comic-page-num" id="comic-page-num">1 / 10</span>
+          <button type="button" class="comic-btn" id="comic-next" aria-label="Next page">Next</button>
+        </div>
+      </div>
+
       <ol class="comics-arc">
         <li class="live"><span>#1</span> Blood in the Alley</li>
         <li><span>#2</span> Prisoner 0-4471</li>
@@ -120,8 +139,30 @@
     </footer>
   </main>
 
+  
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
+    (function () {
+      var img = document.getElementById("comic-page-img");
+      var num = document.getElementById("comic-page-num");
+      var prev = document.getElementById("comic-prev");
+      var next = document.getElementById("comic-next");
+      if (!img || !num || !prev || !next) return;
+      var page = 1;
+      var total = 10;
+      function pad(n) { return n < 10 ? "0" + n : String(n); }
+      function show() {
+        img.src = "assets/comics/issue1/page-" + pad(page) + ".png";
+        img.alt = "720: Soul Protocol Issue #1 — page " + page;
+        num.textContent = page + " / " + total;
+        prev.disabled = page <= 1;
+        next.disabled = page >= total;
+      }
+      prev.addEventListener("click", function () { if (page > 1) { page--; show(); } });
+      next.addEventListener("click", function () { if (page < total) { page++; show(); } });
+      show();
+    })();
   </script>
+
 </body>
 </html>

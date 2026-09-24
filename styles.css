@@ -415,3 +415,78 @@ body {
 .comics-arc li.live span {
   color: var(--magenta);
 }
+
+
+.comic-reader {
+  width: 100%;
+  margin: 0.75rem 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.comic-reader-label {
+  margin: 0;
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.comic-page-frame {
+  margin: 0;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 43, 214, 0.4);
+  box-shadow: 0 0 28px rgba(255, 43, 214, 0.18);
+  background: #000;
+}
+
+.comic-page-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.comic-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.comic-btn {
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(45, 226, 255, 0.45);
+  background: rgba(15, 10, 28, 0.9);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.comic-btn:hover:not(:disabled) {
+  border-color: var(--magenta);
+  box-shadow: 0 0 16px rgba(255, 43, 214, 0.25);
+}
+
+.comic-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.comic-page-num {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  min-width: 4.5rem;
+  text-align: center;
+}
