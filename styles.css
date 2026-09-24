@@ -652,3 +652,29 @@ a.comic-btn[aria-disabled="true"] {
   line-height: 1.35;
   text-align: center;
 }
+
+
+/* Mobile-safe comic pages: real art is 1280x720 landscape */
+.comic-page-frame,
+.comic-scroll-page {
+  aspect-ratio: auto;
+}
+.comic-page-frame img,
+.comic-scroll-page img,
+#comic-page-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  object-position: center;
+  background: #000;
+}
+@supports not (aspect-ratio: 16 / 9) {
+  .comic-page-frame img,
+  .comic-scroll-page img,
+  #comic-page-img {
+    height: auto !important;
+  }
+}
