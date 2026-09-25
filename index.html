@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="comic-viewer.css?v=1" />
 </head>
 <body>
   <div class="bg-grid" aria-hidden="true"></div>
@@ -79,7 +80,7 @@
           <span class="comic-page-num" id="comic-page-num">1 / 10</span>
           <a class="comic-btn comic-btn-next" id="comic-next" href="#issue1-p02" onclick="return window.comicGo(1)">Next &rarr;</a>
         </div>
-        <p class="comic-reader-hint" id="comic-reader-hint">Use Next (or tap the page) to flip</p>
+        <p class="comic-reader-hint" id="comic-reader-hint">Use Next to flip — tap the page to enlarge</p>
         <figure class="comic-page-frame">
           <img
             id="comic-page-img"
@@ -99,7 +100,7 @@
 
 
       <div class="comic-scroll" id="issue1-scroll">
-        <p class="comic-scroll-title">Full issue — scroll to read (no buttons needed)</p>
+        <p class="comic-scroll-title">Full issue — scroll to read · tap any page to enlarge</p>
         <figure class="comic-scroll-page" id="issue1-p01">
           <figcaption class="comic-scroll-label">Page 1 of 10</figcaption>
           <img src="assets/comics/issue1/page-01.png?v=4" alt="Issue #1 page 1" width="1280" height="720" loading="lazy" />
@@ -339,7 +340,7 @@
         if (hint) {
           hint.textContent = page >= total
             ? "End of Issue #1 — or scroll the full issue below"
-            : "Page " + page + " of " + total + " — or scroll the full issue below";
+            : "Page " + page + " of " + total + " — tap the page to enlarge";
         }
         img.classList.remove("comic-flash");
         void img.offsetWidth;
@@ -355,11 +356,24 @@
       };
 
       window.comicTap = function (e) {
+        // Tap the page = open it enlarged in the full-screen viewer
+        if (window.comicViewer) {
+          window.comicViewer.open(page, img, function (p) { window.comicSetPage(p); });
+          return false;
+        }
         var rect = img.getBoundingClientRect();
         var x = ((e && e.clientX) || 0) - rect.left;
         if (rect.width > 0 && x / rect.width < 0.33) window.comicGo(-1);
         else window.comicGo(1);
         return false;
+      };
+
+      window.comicPage = function () { return page; };
+      window.comicSetPage = function (p) {
+        p = parseInt(p, 10);
+        if (!(p >= 1 && p <= total) || p === page) return;
+        page = p;
+        show();
       };
 
       window.comicStart = function () {
@@ -383,6 +397,7 @@
       show();
     })();
   </script>
+  <script src="comic-viewer.js?v=1"></script>
 
 </body>
 </html>
