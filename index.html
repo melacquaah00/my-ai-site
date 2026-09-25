@@ -83,7 +83,7 @@
         <figure class="comic-page-frame">
           <img
             id="comic-page-img"
-            src="assets/comics/issue1/page-01.png"
+            src="assets/comics/issue1/page-01.png?v=2"
             alt="720: Soul Protocol Issue #1 - page 1"
             width="1280"
             height="720"
@@ -102,43 +102,43 @@
         <p class="comic-scroll-title">Full issue — scroll to read (no buttons needed)</p>
         <figure class="comic-scroll-page" id="issue1-p01">
           <figcaption class="comic-scroll-label">Page 1 of 10</figcaption>
-          <img src="assets/comics/issue1/page-01.png" alt="Issue #1 page 1" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-01.png?v=2" alt="Issue #1 page 1" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p02">
           <figcaption class="comic-scroll-label">Page 2 of 10</figcaption>
-          <img src="assets/comics/issue1/page-02.png" alt="Issue #1 page 2" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-02.png?v=2" alt="Issue #1 page 2" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p03">
           <figcaption class="comic-scroll-label">Page 3 of 10</figcaption>
-          <img src="assets/comics/issue1/page-03.png" alt="Issue #1 page 3" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-03.png?v=2" alt="Issue #1 page 3" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p04">
           <figcaption class="comic-scroll-label">Page 4 of 10</figcaption>
-          <img src="assets/comics/issue1/page-04.png" alt="Issue #1 page 4" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-04.png?v=2" alt="Issue #1 page 4" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p05">
           <figcaption class="comic-scroll-label">Page 5 of 10</figcaption>
-          <img src="assets/comics/issue1/page-05.png" alt="Issue #1 page 5" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-05.png?v=2" alt="Issue #1 page 5" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p06">
           <figcaption class="comic-scroll-label">Page 6 of 10</figcaption>
-          <img src="assets/comics/issue1/page-06.png" alt="Issue #1 page 6" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-06.png?v=2" alt="Issue #1 page 6" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p07">
           <figcaption class="comic-scroll-label">Page 7 of 10</figcaption>
-          <img src="assets/comics/issue1/page-07.png" alt="Issue #1 page 7" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-07.png?v=2" alt="Issue #1 page 7" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p08">
           <figcaption class="comic-scroll-label">Page 8 of 10</figcaption>
-          <img src="assets/comics/issue1/page-08.png" alt="Issue #1 page 8" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-08.png?v=2" alt="Issue #1 page 8" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p09">
           <figcaption class="comic-scroll-label">Page 9 of 10</figcaption>
-          <img src="assets/comics/issue1/page-09.png" alt="Issue #1 page 9" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-09.png?v=2" alt="Issue #1 page 9" width="1280" height="720" loading="lazy" />
         </figure>
         <figure class="comic-scroll-page" id="issue1-p10">
           <figcaption class="comic-scroll-label">Page 10 of 10</figcaption>
-          <img src="assets/comics/issue1/page-10.png" alt="Issue #1 page 10" width="1280" height="720" loading="lazy" />
+          <img src="assets/comics/issue1/page-10.png?v=2" alt="Issue #1 page 10" width="1280" height="720" loading="lazy" />
         </figure>
       </div>
 
@@ -315,7 +315,7 @@
       function pad(n) { return n < 10 ? "0" + n : String(n); }
 
       function show() {
-        img.src = "assets/comics/issue1/page-" + pad(page) + ".png?p=" + page;
+        img.src = "assets/comics/issue1/page-" + pad(page) + ".png?v=2&p=" + page;
         img.alt = "720: Soul Protocol Issue #1 - page " + page;
         var label = page + " / " + total;
         num.textContent = label;
