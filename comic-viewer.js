@@ -4,19 +4,33 @@
 (function () {
   "use strict";
 
+  // Each issue: where its pages live and how many there are.
+  var ISSUES = {
+    1: { base: "assets/comics/issue1/page-", ext: ".png?v=4", total: 10, reader: "issue1-reader" },
+    2: { base: "assets/comics/issue2/page-", ext: ".svg?v=1", total: 10, reader: "issue2-reader" }
+  };
+  var cur = 1;
   var TOTAL = 10;
-  var BASE = "assets/comics/issue1/page-";
-  var VER = ".png?v=4";
   var MAX_SCALE = 5;
   var DOUBLE_TAP_SCALE = 2.5;
-  var reader = document.getElementById("issue1-reader");
-  if (reader) {
-    var t = parseInt(reader.getAttribute("data-total") || "10", 10);
-    if (t > 0) TOTAL = t;
+  Object.keys(ISSUES).forEach(function (k) {
+    var r = document.getElementById(ISSUES[k].reader);
+    if (r) {
+      var t = parseInt(r.getAttribute("data-total") || "10", 10);
+      if (t > 0) ISSUES[k].total = t;
+    }
+  });
+  TOTAL = ISSUES[1].total;
+  function setIssue(n) {
+    n = ISSUES[n] ? n : 1;
+    if (n !== cur) { preloaded = {}; }
+    cur = n;
+    TOTAL = ISSUES[cur].total;
+    root.setAttribute("aria-label", "Issue #" + cur + " comic page viewer");
   }
 
   function pad(n) { return n < 10 ? "0" + n : String(n); }
-  function src(n) { return BASE + pad(n) + VER; }
+  function src(n) { return ISSUES[cur].base + pad(n) + ISSUES[cur].ext; }
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
 
   var ICON_X = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
@@ -131,7 +145,7 @@
     img.onerror = function () { img.classList.remove("cv-loading"); };
     img.src = src(page);
     if (img.complete && img.naturalWidth) img.classList.remove("cv-loading");
-    img.alt = "720: Soul Protocol Issue #1 — page " + page + " of " + TOTAL;
+    img.alt = "720: Soul Protocol Issue #" + cur + " — page " + page + " of " + TOTAL;
     countEl.textContent = page + " / " + TOTAL;
     btnPrev.disabled = page <= 1;
     btnNext.disabled = page >= TOTAL;
@@ -195,7 +209,8 @@
     html.style.scrollBehavior = prevBehavior;
   }
 
-  function open(n, fromEl, onClose) {
+  function open(n, fromEl, onClose, issue) {
+    setIssue(issue || 1);
     if (isOpen) { show(n); return; }
     isOpen = true;
     returnFocus = fromEl || document.activeElement;
@@ -481,31 +496,43 @@
   });
 
   // ---------- Hook up Issue #1 page images ----------
-  function makeOpener(el, n, onClose) {
+  function makeOpener(el, n, onClose, issue) {
+    issue = issue || 1;
     el.setAttribute("tabindex", "0");
     el.setAttribute("role", "button");
-    el.setAttribute("aria-label", "Open Issue #1 page " + n + " full screen");
+    el.setAttribute("aria-label", "Open Issue #" + issue + " page " + (typeof n === "function" ? "" : n) + " full screen");
     el.setAttribute("aria-haspopup", "dialog");
     el.addEventListener("keydown", function (e) {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        open(typeof n === "function" ? n() : n, el, onClose);
+        open(typeof n === "function" ? n() : n, el, onClose, issue);
       }
     });
   }
 
-  var scrollImgs = document.querySelectorAll("#issue1-scroll .comic-scroll-page img");
-  Array.prototype.forEach.call(scrollImgs, function (el, i) {
-    var n = i + 1;
-    var m = /page-(\d+)\.png/.exec(el.getAttribute("src") || "");
-    if (m) n = parseInt(m[1], 10);
-    el.setAttribute("data-page", String(n));
-    makeOpener(el, n);
-    el.addEventListener("click", function (e) {
-      e.preventDefault();
-      open(n, el);
+  [1, 2].forEach(function (issue) {
+    var scrollImgs = document.querySelectorAll("#issue" + issue + "-scroll .comic-scroll-page img");
+    Array.prototype.forEach.call(scrollImgs, function (el, i) {
+      var n = i + 1;
+      var m = /page-(\d+)\.(png|svg|jpg)/.exec(el.getAttribute("src") || "");
+      if (m) n = parseInt(m[1], 10);
+      el.setAttribute("data-page", String(n));
+      makeOpener(el, n, null, issue);
+      el.addEventListener("click", function (e) {
+        e.preventDefault();
+        open(n, el, null, issue);
+      });
     });
   });
+
+  // Issue #2 flip-through reader image
+  var reader2Img = document.getElementById("i2-page-img");
+  if (reader2Img) {
+    makeOpener(reader2Img, function () { return window.comic2Page ? window.comic2Page() : 1; }, function (p) {
+      if (window.comic2SetPage) window.comic2SetPage(p);
+    }, 2);
+    reader2Img.setAttribute("aria-label", "Open current Issue #2 page full screen");
+  }
 
   // Flip-through reader image: its inline onclick calls window.comicTap(),
   // which now opens this viewer at the reader's current page.

@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MY A.I. — Sabathil720</title>
-  <meta name="description" content="MY A.I. — official brand hub for Sabathil720. Watch the video. Read 720: Soul Protocol. Futuresodes and merch coming soon." />
+  <meta name="description" content="MY A.I. — official brand hub for Sabathil720. Watch the video. Read 720: Soul Protocol Issues #1 and #2. Futuresodes and merch coming soon." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="comic-viewer.css?v=1" />
+  <style>
+    .comics-new { margin: 0.25rem 0 0.5rem; text-align: center; }
+    .issue-block { width: 100%; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255, 43, 214, 0.35); display: flex; flex-direction: column; align-items: center; gap: 0.85rem; }
+    #i2-page-img { cursor: pointer; display: block; width: 100%; max-width: 100%; height: auto !important; aspect-ratio: 16 / 9; object-fit: contain; background: #000; -webkit-tap-highlight-color: rgba(255, 43, 214, 0.35); }
+  </style>
 </head>
 <body>
   <div class="bg-grid" aria-hidden="true"></div>
@@ -72,6 +77,7 @@
         prisoner tags still on — bleeding in a CrumpCorp alley. The machines want a soul.
         This is where the hunt begins.
       </p>
+      <p class="comics-new"><a class="comic-btn comic-btn-next" href="#issue2">New: Issue #2 — Prisoner 0-4471 &darr;</a></p>
 
       <div class="comic-reader" id="issue1-reader" data-total="10">
         <p class="comic-reader-label">Read Issue #1</p>
@@ -143,6 +149,97 @@
         </figure>
       </div>
 
+      <div class="issue-block" id="issue2">
+        <p class="comics-kicker">720: SOUL PROTOCOL</p>
+        <h2 class="comics-title">Prisoner 0-4471</h2>
+        <p class="comics-issue">Issue #2</p>
+        <figure class="comics-cover" id="comics-cover-2" title="Tap to start reading">
+          <img
+            src="assets/issue2-cover.svg?v=1"
+            alt="720: Soul Protocol Issue #2 - Prisoner 0-4471 cover"
+            width="900"
+            height="1200"
+            onclick="window.comic2Start()"
+          />
+          <figcaption class="comics-cover-caption">Tap cover to start reading</figcaption>
+        </figure>
+        <p class="comics-blurb">
+          Minutes after the alley, CrumpCorp's drones find the garage. Sierra's chrome arms
+          wake up and fight on their own, 720 reads her band and learns it was never a
+          prisoner number, and President Ewanka Crump goes on air to recover her
+          "stolen property."
+        </p>
+
+        <div class="comic-reader" id="issue2-reader" data-total="10">
+          <p class="comic-reader-label">Read Issue #2</p>
+          <div class="comic-controls">
+            <a class="comic-btn" id="i2-prev" href="#issue2-p01" onclick="return window.comic2Go(-1)">&larr; Prev</a>
+            <span class="comic-page-num" id="i2-page-num">1 / 10</span>
+            <a class="comic-btn comic-btn-next" id="i2-next" href="#issue2-p02" onclick="return window.comic2Go(1)">Next &rarr;</a>
+          </div>
+          <p class="comic-reader-hint" id="i2-reader-hint">Use Next to flip — tap the page to enlarge</p>
+          <figure class="comic-page-frame">
+            <img
+              id="i2-page-img"
+              src="assets/comics/issue2/page-01.svg?v=1"
+              alt="720: Soul Protocol Issue #2 - page 1"
+              width="1280"
+              height="720"
+              onclick="window.comic2Tap(event)"
+            />
+          </figure>
+          <div class="comic-controls">
+            <button type="button" class="comic-btn" onclick="window.comic2Go(-1)">&larr; Prev</button>
+            <span class="comic-page-num" id="i2-page-num-bottom">1 / 10</span>
+            <button type="button" class="comic-btn comic-btn-next" onclick="window.comic2Go(1)">Next &rarr;</button>
+          </div>
+        </div>
+
+        <div class="comic-scroll" id="issue2-scroll">
+          <p class="comic-scroll-title">Full issue — scroll to read · tap any page to enlarge</p>
+        <figure class="comic-scroll-page" id="issue2-p01">
+          <figcaption class="comic-scroll-label">Page 1 of 10</figcaption>
+          <img src="assets/comics/issue2/page-01.svg?v=1" alt="Issue #2 page 1" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p02">
+          <figcaption class="comic-scroll-label">Page 2 of 10</figcaption>
+          <img src="assets/comics/issue2/page-02.svg?v=1" alt="Issue #2 page 2" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p03">
+          <figcaption class="comic-scroll-label">Page 3 of 10</figcaption>
+          <img src="assets/comics/issue2/page-03.svg?v=1" alt="Issue #2 page 3" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p04">
+          <figcaption class="comic-scroll-label">Page 4 of 10</figcaption>
+          <img src="assets/comics/issue2/page-04.svg?v=1" alt="Issue #2 page 4" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p05">
+          <figcaption class="comic-scroll-label">Page 5 of 10</figcaption>
+          <img src="assets/comics/issue2/page-05.svg?v=1" alt="Issue #2 page 5" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p06">
+          <figcaption class="comic-scroll-label">Page 6 of 10</figcaption>
+          <img src="assets/comics/issue2/page-06.svg?v=1" alt="Issue #2 page 6" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p07">
+          <figcaption class="comic-scroll-label">Page 7 of 10</figcaption>
+          <img src="assets/comics/issue2/page-07.svg?v=1" alt="Issue #2 page 7" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p08">
+          <figcaption class="comic-scroll-label">Page 8 of 10</figcaption>
+          <img src="assets/comics/issue2/page-08.svg?v=1" alt="Issue #2 page 8" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p09">
+          <figcaption class="comic-scroll-label">Page 9 of 10</figcaption>
+          <img src="assets/comics/issue2/page-09.svg?v=1" alt="Issue #2 page 9" width="1280" height="720" loading="lazy" />
+        </figure>
+        <figure class="comic-scroll-page" id="issue2-p10">
+          <figcaption class="comic-scroll-label">Page 10 of 10</figcaption>
+          <img src="assets/comics/issue2/page-10.svg?v=1" alt="Issue #2 page 10" width="1280" height="720" loading="lazy" />
+        </figure>
+        </div>
+      </div>
+
       <ol class="comics-arc" aria-label="Series roadmap">
         <li class="live">
           <a class="comics-arc-link" href="#issue1-reader">
@@ -150,14 +247,14 @@
             <em class="arc-status">Read now</em>
           </a>
         </li>
-        <li class="soon">
-          <button type="button" class="comics-arc-link" data-soon="Issue #2 is written. Art comes next.">
+        <li class="live">
+          <a class="comics-arc-link" href="#issue2-reader">
             <span>#2</span> Prisoner 0-4471
-            <em class="arc-status">Coming soon</em>
-          </button>
+            <em class="arc-status">Read now</em>
+          </a>
         </li>
         <li class="soon">
-          <button type="button" class="comics-arc-link" data-soon="Locked until Issue #2.">
+          <button type="button" class="comics-arc-link" data-soon="Issue #3 is next.">
             <span>#3</span> The Ghost in the Suture
             <em class="arc-status">Coming soon</em>
           </button>
@@ -391,13 +488,81 @@
           var note = document.getElementById("comics-arc-note");
           if (!note) return;
           note.hidden = false;
-          note.textContent = btn.getAttribute("data-soon") + " Issue #1 is up above — hit Next or scroll the full issue.";
+          note.textContent = btn.getAttribute("data-soon") + " Issues #1 and #2 are up above — hit Next or scroll the full issue.";
         });
       });
       show();
     })();
   </script>
-  <script src="comic-viewer.js?v=1"></script>
+  <script>
+    (function () {
+      var img = document.getElementById("i2-page-img");
+      var num = document.getElementById("i2-page-num");
+      var numBottom = document.getElementById("i2-page-num-bottom");
+      var prev = document.getElementById("i2-prev");
+      var next = document.getElementById("i2-next");
+      var hint = document.getElementById("i2-reader-hint");
+      var reader = document.getElementById("issue2-reader");
+      if (!img || !num) return;
+      var page = 1, total = 10;
+      if (reader) {
+        var t = parseInt(reader.getAttribute("data-total") || "10", 10);
+        if (t > 0) total = t;
+      }
+      function pad(n) { return n < 10 ? "0" + n : String(n); }
+      function show() {
+        img.src = "assets/comics/issue2/page-" + pad(page) + ".svg?v=1";
+        img.alt = "720: Soul Protocol Issue #2 - page " + page;
+        var label = page + " / " + total;
+        num.textContent = label;
+        if (numBottom) numBottom.textContent = label;
+        if (prev) {
+          prev.href = "#issue2-p" + pad(Math.max(1, page - 1));
+          if (page <= 1) prev.setAttribute("aria-disabled", "true"); else prev.removeAttribute("aria-disabled");
+        }
+        if (next) {
+          next.href = "#issue2-p" + pad(Math.min(total, page + 1));
+          if (page >= total) next.setAttribute("aria-disabled", "true"); else next.removeAttribute("aria-disabled");
+        }
+        if (hint) {
+          hint.textContent = page >= total
+            ? "End of Issue #2 — or scroll the full issue below"
+            : "Page " + page + " of " + total + " — tap the page to enlarge";
+        }
+        img.classList.remove("comic-flash");
+        void img.offsetWidth;
+        img.classList.add("comic-flash");
+      }
+      window.comic2Go = function (delta) {
+        var n = page + delta;
+        if (n < 1 || n > total) return false;
+        page = n; show(); return false;
+      };
+      window.comic2Tap = function (e) {
+        if (window.comicViewer) {
+          window.comicViewer.open(page, img, function (p) { window.comic2SetPage(p); }, 2);
+          return false;
+        }
+        var rect = img.getBoundingClientRect();
+        var x = ((e && e.clientX) || 0) - rect.left;
+        if (rect.width > 0 && x / rect.width < 0.33) window.comic2Go(-1); else window.comic2Go(1);
+        return false;
+      };
+      window.comic2Page = function () { return page; };
+      window.comic2SetPage = function (p) {
+        p = parseInt(p, 10);
+        if (!(p >= 1 && p <= total) || p === page) return;
+        page = p; show();
+      };
+      window.comic2Start = function () {
+        page = 1; show();
+        if (reader) reader.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (hint) hint.textContent = "Started — hit Next to turn the page";
+        return false;
+      };
+    })();
+  </script>
+  <script src="comic-viewer.js?v=2"></script>
 
 </body>
 </html>
