@@ -7,7 +7,7 @@
   // Each issue: where its pages live and how many there are.
   var ISSUES = {
     1: { base: "assets/comics/issue1/page-", ext: ".png?v=4", total: 10, reader: "issue1-reader" },
-    2: { base: "assets/comics/issue2/page-", ext: ".svg?v=1", total: 10, reader: "issue2-reader" }
+    2: { base: "assets/comics/issue2/page-", ext: ".svg?v=2", total: 10, reader: "issue2-reader" }
   };
   var cur = 1;
   var TOTAL = 10;
