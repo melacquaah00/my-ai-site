@@ -4,12 +4,12 @@ on:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   deploy:
     environment:
@@ -24,6 +24,30 @@ jobs:
             base64 -d hero.jpg.b64 > hero.jpg
           fi
           ls -la index.html styles.css hero.jpg .nojekyll
+      - name: Assemble binary assets from base64 parts (assets/**/NAME.b64parts/part-NNN.b64)
+        run: |
+          set -euo pipefail
+          found=0
+          while IFS= read -r d; do
+            out="${d%.b64parts}"
+            want="$(cat "$d/SHA256")"
+            n=$(ls "$d"/part-*.b64 | wc -l)
+            expect="$(cat "$d/COUNT")"
+            if [ "$n" != "$expect" ]; then echo "$d: have $n of $expect parts, skipping"; continue; fi
+            cat "$d"/part-*.b64 | base64 -d > "$out"
+            got="$(sha256sum "$out" | cut -d' ' -f1)"
+            if [ "$got" != "$want" ]; then echo "checksum mismatch for $out"; rm -f "$out"; exit 1; fi
+            ls -la "$out"
+            git rm -rq "$d"
+            git add "$out"
+            found=1
+          done < <(find assets -type d -name '*.b64parts' 2>/dev/null)
+          if [ "$found" = 1 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -qm "Assemble binary assets from base64 parts"
+            git push origin HEAD:main
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
