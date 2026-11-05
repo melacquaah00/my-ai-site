@@ -738,3 +738,100 @@ a.comic-btn[aria-disabled="true"] {
 .bio-card p:last-child {
   margin-bottom: 0;
 }
+
+
+/* MyAI720 social row — neon noir */
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  margin: 0;
+}
+
+.social {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  min-width: 4.4rem;
+  padding: 0.55rem 0.7rem 0.5rem;
+  text-decoration: none;
+  color: var(--ink);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 43, 214, 0.4);
+  background:
+    linear-gradient(180deg, rgba(255, 43, 214, 0.12), rgba(45, 226, 255, 0.05));
+  box-shadow: 0 0 18px rgba(255, 43, 214, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  -webkit-tap-highlight-color: rgba(255, 43, 214, 0.35);
+}
+
+.social svg {
+  width: 1.35rem;
+  height: 1.35rem;
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(45, 226, 255, 0.55));
+}
+
+.social-label {
+  font-family: "Orbitron", "Rajdhani", sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.social:hover,
+.social:focus-visible {
+  transform: translateY(-2px);
+  color: var(--cyan);
+  border-color: rgba(45, 226, 255, 0.7);
+  box-shadow: 0 0 28px rgba(45, 226, 255, 0.28), 0 0 18px rgba(255, 43, 214, 0.22);
+}
+
+.social:hover .social-label,
+.social:focus-visible .social-label {
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(45, 226, 255, 0.55);
+}
+
+.social:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.foot .socials {
+  margin-bottom: 0.85rem;
+}
+
+.foot-handle {
+  color: var(--magenta);
+  text-decoration: none;
+  text-shadow: 0 0 10px rgba(255, 43, 214, 0.45);
+}
+
+.foot-handle:hover,
+.foot-handle:focus-visible {
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(45, 226, 255, 0.55);
+}
+
+@media (max-width: 380px) {
+  .social {
+    min-width: 3.9rem;
+    padding: 0.5rem 0.45rem 0.45rem;
+  }
+  .social svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .social-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+  }
+}
