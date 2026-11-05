@@ -742,11 +742,11 @@ a.comic-btn[aria-disabled="true"] {
 
 /* MyAI720 social row — neon noir */
 .socials {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   justify-content: center;
-  align-items: center;
-  gap: 0.65rem;
+  align-items: stretch;
+  gap: 0.55rem;
   width: 100%;
   margin: 0;
 }
@@ -757,8 +757,9 @@ a.comic-btn[aria-disabled="true"] {
   align-items: center;
   justify-content: center;
   gap: 0.28rem;
-  min-width: 4.4rem;
-  padding: 0.55rem 0.7rem 0.5rem;
+  min-width: 0;
+  width: 100%;
+  padding: 0.55rem 0.35rem 0.5rem;
   text-decoration: none;
   color: var(--ink);
   border-radius: 12px;
@@ -822,16 +823,16 @@ a.comic-btn[aria-disabled="true"] {
 }
 
 @media (max-width: 380px) {
+  .socials { gap: 0.4rem; }
   .social {
-    min-width: 3.9rem;
-    padding: 0.5rem 0.45rem 0.45rem;
+    padding: 0.5rem 0.2rem 0.45rem;
   }
   .social svg {
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 1.15rem;
+    height: 1.15rem;
   }
   .social-label {
-    font-size: 0.52rem;
-    letter-spacing: 0.1em;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
   }
 }
