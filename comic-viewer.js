@@ -7,7 +7,9 @@
   // Each issue: where its pages live and how many there are.
   var ISSUES = {
     1: { base: "assets/comics/issue1/page-", ext: ".png?v=4", total: 10, reader: "issue1-reader" },
-    2: { base: "assets/comics/issue2/page-", ext: ".svg?v=2", total: 10, reader: "issue2-reader" }
+    2: { base: "assets/comics/issue2/page-", ext: ".svg?v=2", total: 10, reader: "issue2-reader" },
+    3: { base: "assets/comics/issue3/page-", ext: ".png?v=1", total: 10, reader: "issue3-reader" },
+    4: { base: "assets/comics/issue4/page-", ext: ".png?v=1", total: 10, reader: "issue4-reader" }
   };
   var cur = 1;
   var TOTAL = 10;
@@ -510,7 +512,7 @@
     });
   }
 
-  [1, 2].forEach(function (issue) {
+  [1, 2, 3, 4].forEach(function (issue) {
     var scrollImgs = document.querySelectorAll("#issue" + issue + "-scroll .comic-scroll-page img");
     Array.prototype.forEach.call(scrollImgs, function (el, i) {
       var n = i + 1;
@@ -533,6 +535,16 @@
     }, 2);
     reader2Img.setAttribute("aria-label", "Open current Issue #2 page full screen");
   }
+
+  [3, 4].forEach(function (issue) {
+    var rImg = document.getElementById("i" + issue + "-page-img");
+    if (rImg) {
+      makeOpener(rImg, function () { return window["comic" + issue + "Page"] ? window["comic" + issue + "Page"]() : 1; }, function (p) {
+        if (window["comic" + issue + "SetPage"]) window["comic" + issue + "SetPage"](p);
+      }, issue);
+      rImg.setAttribute("aria-label", "Open current Issue #" + issue + " page full screen");
+    }
+  });
 
   // Flip-through reader image: its inline onclick calls window.comicTap(),
   // which now opens this viewer at the reader's current page.
