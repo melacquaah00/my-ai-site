@@ -8,8 +8,8 @@
   var ISSUES = {
     1: { base: "assets/comics/issue1/page-", ext: ".png?v=4", total: 10, reader: "issue1-reader" },
     2: { base: "assets/comics/issue2/page-", ext: ".svg?v=2", total: 10, reader: "issue2-reader" },
-    3: { base: "assets/comics/issue3/page-", ext: ".png?v=1", total: 10, reader: "issue3-reader" },
-    4: { base: "assets/comics/issue4/page-", ext: ".png?v=1", total: 10, reader: "issue4-reader" }
+    3: { base: "assets/comics/issue3/page-", ext: ".png?v=2", total: 10, reader: "issue3-reader" },
+    4: { base: "assets/comics/issue4/page-", ext: ".png?v=2", total: 10, reader: "issue4-reader" }
   };
   var cur = 1;
   var TOTAL = 10;
