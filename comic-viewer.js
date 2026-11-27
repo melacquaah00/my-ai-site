@@ -11,7 +11,6 @@
     3: { base: "assets/comics/issue3/page-", ext: ".png?v=2", total: 10, reader: "issue3-reader" },
     4: { base: "assets/comics/issue4/page-", ext: ".png?v=2", total: 10, reader: "issue4-reader" },
     5: { base: "assets/comics/issue5/page-", ext: ".png?v=1", total: 10, reader: "issue5-reader" },
-    6: { base: "assets/comics/issue6/page-", ext: ".png?v=1", total: 10, reader: "issue6-reader" }
   };
   var cur = 1;
   var TOTAL = 10;
